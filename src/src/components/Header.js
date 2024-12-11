@@ -13,7 +13,7 @@ import { Box } from "@mui/system";
 import { getAllMovies } from "../api-helpers/api-helpers";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { adminActions, userActions } from "../store";
+import { adminActions, userActions } from "../src/store";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

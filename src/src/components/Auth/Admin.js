@@ -1,31 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { sendUserAuthRequest } from "../../api-helpers/api-helpers";
-import { userActions } from "../../store";
+import { sendAdminAuthRequest } from "../../api-helpers/api-helpers";
+import { adminActions } from "../../src/store";
 import AuthForm from "./AuthForm";
 
-const Auth = () => {
+const Admin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onResReceived = (data) => {
     console.log(data);
-    dispatch(userActions.login());
-    localStorage.setItem("userId", data.id);
+    dispatch(adminActions.login());
+    localStorage.setItem("adminId", data.id);
+    localStorage.setItem("token", data.token);
     navigate("/");
   };
   const getData = (data) => {
-    console.log(data);
-    sendUserAuthRequest(data.inputs, data.signup)
+    console.log("Admin", data);
+    sendAdminAuthRequest(data.inputs)
       .then(onResReceived)
       .catch((err) => console.log(err));
   };
-
   return (
     <div>
-      <AuthForm onSubmit={getData} isAdmin={false} />
+      <AuthForm onSubmit={getData} isAdmin={true} />
     </div>
   );
 };
 
-export default Auth;
+export default Admin;
